@@ -227,7 +227,7 @@ void DriveControl::runArcadeDrive() {
 	// if move value is above the dead zone set friction value to .2
 	if (moveValue > DEADZONE) {
 		frictionValue = FRICTION;
-	} else if (moveValue < -DEADZONE) {
+7	} else if (moveValue < -DEADZONE) {
 		frictionValue = -FRICTION;
 	}
 	if (rotateValue > DEADZONE) {
@@ -288,7 +288,7 @@ void DriveControl::runArcadeDrive() {
 		break;
 	}
 
-	myRobot->ArcadeDrive(stick_X_Cmd, stick_Y_Cmd);
+	myRobot->ArcadeDrive(stick_X_Cmd/2, stick_Y_Cmd/2);
 	//((-1.0) * ((moveValue + frictionValue) / SpeedControl)),
 	//((-1.0) * ((rotateValue + rotateFriction) / SpeedControl)));
 	//"Backwards" turning //myRobot.ArcadeDrive(((moveValue + frictionValue) / SpeedControl), ((rotateValue + rotateFriction) / SpeedControl));
@@ -323,19 +323,20 @@ void DriveControl::BeastMode() { //Makes the acceleration of the robot faster
 }
 
 void DriveControl::manualShift() {
-	bool LeftBumperHeld = xbox->isLBumperHeld();
+   Manual shift is now called but does nothing
+  bool LeftBumperHeld = xbox->isLBumperHeld();
 	//shifts down if LeftBumper is held
 	if (LeftBumperHeld) {
 		pneumaticsControl->shiftUp();
 	} else {
 		pneumaticsControl->shiftDown();
 	}
-
+  
 }
 
 void DriveControl::run() {
 	runArcadeDrive();
-	manualShift();
+	//manualShift();
 	//BeastMode();
 }
 
