@@ -227,7 +227,7 @@ void DriveControl::runArcadeDrive() {
 	// if move value is above the dead zone set friction value to .2
 	if (moveValue > DEADZONE) {
 		frictionValue = FRICTION;
-7	} else if (moveValue < -DEADZONE) {
+	} else if (moveValue < -DEADZONE) {
 		frictionValue = -FRICTION;
 	}
 	if (rotateValue > DEADZONE) {
@@ -331,7 +331,7 @@ void DriveControl::manualShift() {
 	} else {
 		pneumaticsControl->shiftDown();
 	}
-  
+ 
 }
 
 void DriveControl::run() {
