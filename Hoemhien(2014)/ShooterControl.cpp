@@ -359,13 +359,17 @@ bool ShooterControl::canIFire() {//A check to see if the ballgrabber is Extended
 
 void ShooterControl::PIDShooter() {//Shooting Using Encoder Count and PIDControl
 	bool isRTHeld = xbox->isRightTriggerHeld();
-	bool isYPressed = xbox->isYPressed();
+	//Disables Y from doing anything by makeing it always false
+	//bool isYPressed = xbox->isYPressed();
+	bool isYPressed = 0;
 	bool isLTHeld = xbox->isLeftTriggerHeld();
 	bool isUpperLimit = upperLimit->Get() == 0;
 	bool isLowerLimit = lowerLimit->Get() == 0;
 	bool isRBHeld = xbox->isRBumperHeld();
 	bool isXPressed = xbox->isXPressed();
-	bool isBPressed = xbox->isBPressed();
+	//bool isBPressed = xbox->isBPressed();
+	bool isBPressed = 1;
+
 
 	//for ramping
 	double timeChange = (shooterTimer.Get() - previousTime);
@@ -436,6 +440,7 @@ void ShooterControl::PIDShooter() {//Shooting Using Encoder Count and PIDControl
 					pIDControlOutput->PIDOverideEnable(twoStagePidFire);
 					maxEncoderValue = 0;
 				}
+
 				if (isYPressed && canIFire()) {//twoStageFire Shoot. Originally used to be RT Held and X 
 					twoStageSetupPosition = 5;
 					twoStagePidSetup = -0.08;
@@ -445,6 +450,7 @@ void ShooterControl::PIDShooter() {//Shooting Using Encoder Count and PIDControl
 					pIDControlOutput->PIDOverideEnable(twoStagePidFire);
 					maxEncoderValue = 0;
 				}
+
 
 				if (isBPressed && canIFire()) {//twoStageFire Shoot. Jim's Favorite shoot. Shoots the ball insanely high
 					twoStageSetupPosition = 15;
